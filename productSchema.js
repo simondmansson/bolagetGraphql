@@ -9,7 +9,7 @@ const {
 } = require('graphql')
 const {
   getProducts,
-  getProduct } = require('./lib/SystembolagetClient.js')
+  getProductById } = require('./lib/SystembolagetClient.js')
 
 const ProductType = new GraphQLObjectType({
   name: 'Product',
@@ -66,7 +66,7 @@ const QueryType = new GraphQLObjectType({
       args: {
         id: { type: GraphQLString }
       },
-      resolve: (root, args) => getProduct(args.id)
+      resolve: (root, args) => getProductById(args.id)
     },
     products: {
       type: GraphQLList(ProductType),
