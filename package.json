@@ -4,7 +4,7 @@
   "description": "Unofficial graphQL layer over Systembolagets API",
   "main": "index.js",
   "scripts": {
-    "test": "ava test"
+    "test": "ava"
   },
   "keywords": [
     "Systembolaget",
