@@ -1,6 +1,6 @@
 {
   "name": "systembolagetgraphql",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unofficial graphQL layer over Systembolagets API",
   "main": "index.js",
   "scripts": {
