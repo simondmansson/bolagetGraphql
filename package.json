@@ -1,6 +1,6 @@
 {
   "name": "systembolagetgraphql",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Unofficial graphQL layer over Systembolagets API",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-graphql": "^0.8.0",
+    "express-rate-limit": "^5.0.0",
     "graphql": "^14.3.1"
   }
 }
