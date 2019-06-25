@@ -1,4 +1,4 @@
 runtime: nodejs8
 
 env_variables:
-  SYSTEMBOLAGETAPIKEY: "$APIKEY$"
+  SYSTEMBOLAGETAPIKEY: "APIKEY"
