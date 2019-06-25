@@ -6,7 +6,6 @@ before_install:
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 - sed -i "s/bolaget/$SYSTEMBOLAGETAPIKEY/g" app.yaml
-- cat app.yaml
 deploy:
   provider: gae
   keyfile: graphqlbolaget-cb1b1c754470.json
