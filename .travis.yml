@@ -6,6 +6,7 @@ before_install:
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 - pwd
+- cat app.yaml
 deploy:
   provider: gae
   keyfile: graphqlbolaget-cb1b1c754470.json
