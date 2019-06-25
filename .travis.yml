@@ -10,4 +10,5 @@ deploy:
   provider: gae
   keyfile: graphqlbolaget-cb1b1c754470.json
   project: graphqlbolaget
+  skip_cleanup: true
   on: master
