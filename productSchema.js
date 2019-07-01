@@ -9,7 +9,8 @@ const {
 } = require('graphql')
 const {
   getProducts,
-  getProductById } = require('./lib/SystembolagetClient.js')
+  getProductById,
+  getProductsBySearch } = require('./lib/SystembolagetClient.js')
 
 const ProductType = new GraphQLObjectType({
   name: 'Product',
@@ -58,8 +59,8 @@ const ProductType = new GraphQLObjectType({
 })
 
 const QueryType = new GraphQLObjectType({
-  name: 'Query',
-  description: '...',
+  name: 'ProductQuery',
+  description: 'Product related query options.',
   fields: () => ({
     product: {
       type: ProductType,
@@ -71,7 +72,24 @@ const QueryType = new GraphQLObjectType({
     products: {
       type: GraphQLList(ProductType),
       resolve: () => getProducts()
+    },
+    productSearch: {
+      type: GraphQLList(ProductType),
+      description: 'Search for products matching the supplied arguments',
+      args: {
+        SearchQuery: { type: GraphQLString },
+        Type: { type: GraphQLString },
+        PriceMin: { type: GraphQLFloat },
+        PriceMax: { type: GraphQLFloat }
+      },
+      resolve: (root, args) => {
+        const argString = Object.keys(args)
+          .map(k => `${k}=${args[k]}`)
+          .join('&')
+        return getProductsBySearch(argString)
+      }
     }
+
   })
 })
 
