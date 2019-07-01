@@ -59,7 +59,7 @@ const ProductType = new GraphQLObjectType({
 })
 
 const QueryType = new GraphQLObjectType({
-  name: 'Product query',
+  name: 'ProductQuery',
   description: 'Product related query options.',
   fields: () => ({
     product: {
@@ -75,9 +75,16 @@ const QueryType = new GraphQLObjectType({
     },
     productSearch: {
       type: GraphQLList(ProductType),
+      description: 'Search for products matching the supplied arguments',
+      args: {
+        SearchQuery: { type: GraphQLString },
+        Type: { type: GraphQLString },
+        PriceMin: { type: GraphQLFloat },
+        PriceMax: { type: GraphQLFloat }
+      },
       resolve: (root, args) => {
         const argString = Object.keys(args)
-          .map((k, i) => `${k}=${i}`)
+          .map(k => `${k}=${args[k]}`)
           .join('&')
         return getProductsBySearch(argString)
       }
