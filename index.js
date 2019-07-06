@@ -13,6 +13,10 @@ const limiter = rateLimit({
 })
 
 app.use(limiter)
+app.use((_, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
+})
 
 app.use('/graph', graphQLHTTP({
   schema,
