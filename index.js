@@ -25,7 +25,7 @@ app.use('/graph/view', graphQLHTTP({
   graphiql: true
 }))
 
-app.get('/graph', graphQLHTTP({
+app.use('/graph', graphQLHTTP({
   schema
 }))
 
