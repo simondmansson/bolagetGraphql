@@ -13,16 +13,20 @@ const limiter = rateLimit({
 })
 
 app.use(limiter)
-app.use((_, res, next) => {
+app.use('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   res.header('Access-Control-Allow-Methods', 'POST', 'GET', 'OPTIONS')
   next()
 })
 
-app.use('/graph', graphQLHTTP({
+app.use('/graph/view', graphQLHTTP({
   schema,
   graphiql: true
+}))
+
+app.get('/graph', graphQLHTTP({
+  schema
 }))
 
 app.use(healthRouter)
