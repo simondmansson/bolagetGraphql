@@ -10,11 +10,13 @@ const {
 const {
   getProducts,
   getProductById,
-  getProductsBySearch } = require('./lib/SystembolagetClient.js')
+  getProductsBySearch,
+  getSitesBySearch
+} = require('./lib/SystembolagetClient.js')
 
 const ProductType = new GraphQLObjectType({
   name: 'Product',
-  description: '...',
+  description: 'Product information',
   fields: () => ({
     ProductId: { type: GraphQLString },
     ProductNumber: { type: GraphQLString },
@@ -58,8 +60,43 @@ const ProductType = new GraphQLObjectType({
   })
 })
 
+const PositionType = new GraphQLObjectType({
+  name: 'Position',
+  description: 'Latitude and longitude of a store',
+  fields: () => ({
+    Long: { type: GraphQLFloat },
+    Lat: { type: GraphQLFloat }
+  })
+})
+
+const SiteType = new GraphQLObjectType({
+  name: 'SiteType',
+  description: 'Systembolaget store information',
+  fields: () => ({
+    IsTastingStore: { type: GraphQLBoolean },
+    SiteId: { type: GraphQLString },
+    Alias: { type: GraphQLString },
+    Address: { type: GraphQLString },
+    DisplayName: { type: GraphQLString },
+    PostalCode: { type: GraphQLString },
+    City: { type: GraphQLString },
+    County: { type: GraphQLString },
+    Country: { type: GraphQLString },
+    IsStore: { type: GraphQLBoolean },
+    IsAgent: { type: GraphQLBoolean },
+    IsActiveForAgentOrder: { type: GraphQLBoolean },
+    Phone: { type: GraphQLString },
+    Email: { type: GraphQLString },
+    Services: { type: GraphQLString },
+    OpeningHours: { type: GraphQLString },
+    Depot: { type: GraphQLString },
+    Name: { type: GraphQLString },
+    Position: { type: PositionType }
+  })
+})
+
 const QueryType = new GraphQLObjectType({
-  name: 'ProductQuery',
+  name: 'SystembolagetQuery',
   description: 'Product related query options.',
   fields: () => ({
     product: {
@@ -88,8 +125,20 @@ const QueryType = new GraphQLObjectType({
           .join('&')
         return getProductsBySearch(argString)
       }
+    },
+    siteSearch: {
+      type: GraphQLList(SiteType),
+      description: 'Search for sites matching the supplied arguments',
+      args: {
+        SearchQuery: { type: GraphQLString }
+      },
+      resolve: (root, args) => {
+        const argString = Object.keys(args)
+          .map(k => `${k}=${args[k]}`)
+          .join('&')
+        return getSitesBySearch(argString)
+      }
     }
-
   })
 })
 

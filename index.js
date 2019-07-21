@@ -3,8 +3,8 @@ const rateLimit = require('express-rate-limit')
 const express = require('express')
 const app = express()
 const graphQLHTTP = require('express-graphql')
-const schema = require('./productSchema.js')
-const healthRouter = require('./health.js')
+const schema = require('./systembolagetSchema')
+const healthRouter = require('./health')
 const port = process.env.PORT || 5005
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000,
