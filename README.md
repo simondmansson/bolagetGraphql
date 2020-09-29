@@ -1,3 +1,5 @@
+# As of 1 nov 2020 Systembolaget no longer provides price information through their open APIs.
+
 # bolagetGraphQL
 
 A graphQL wrapper over [Systembolagets](https://www.systembolaget.se/) REST-API.
